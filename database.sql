@@ -149,3 +149,40 @@ INSERT INTO Reward (Reward_ID, Plan_ID, Target_Day_Count, Badge_Name, Issue_Date
 (3, 2, 7, 'Sugar Detox Rookie', '2024-02-08'),
 (4, 3, 30, 'Vape Free Champion', '2024-02-15'),
 (5, 4, 7, 'Healthy Chef', '2024-03-08');
+
+
+-- ==========================================
+-- PART 3: QUERIES (DQL - Select Operations)
+-- ==========================================
+
+-- ==========================================
+-- QUERIES BY: Can Sever (34307)
+-- ==========================================
+
+-- Query 1: List Habit Name and Start Date of all plans.
+SELECT Habit_Name, Start_Date FROM Habit_Plan;
+
+-- Query 2: List Usernames and the names of their Habit Plans.
+SELECT u.Username, h.Habit_Name 
+FROM User u 
+JOIN Habit_Plan h ON u.User_ID = h.User_ID;
+
+-- Query 3: Count the total number of Alternative Activities.
+SELECT COUNT(*) AS Total_Activities FROM Alternative_Activity;
+
+-- Query 4: Find users who have at least one Relapse Log.
+SELECT Username FROM User 
+WHERE User_ID IN (
+    SELECT User_ID FROM Habit_Plan 
+    WHERE Plan_ID IN (SELECT Plan_ID FROM Relapse_Log)
+);
+
+-- Query 5: List Incident Date and Trigger Reason for 'Smoking' habit relapses.
+SELECT r.Incident_Date, r.Trigger_Reason 
+FROM Relapse_Log r 
+JOIN Habit_Plan h ON r.Plan_ID = h.Plan_ID 
+WHERE h.Habit_Name = 'Smoking';
+
+-- ==========================================
+-- Remaining queries will be added.
+-- ==========================================
