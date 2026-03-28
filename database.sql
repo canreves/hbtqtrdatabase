@@ -184,5 +184,48 @@ JOIN Habit_Plan h ON r.Plan_ID = h.Plan_ID
 WHERE h.Habit_Name = 'Smoking';
 
 -- ==========================================
--- Remaining queries will be added.
+-- QUERIES BY: Eren Sean Harley (36054)
+-- ==========================================
+
+--Query 1: Count the number of relapse logs for each habit plan.
+SELECT h.Plan_ID, h.Habit_Name, COUNT(r.Log_ID) AS Relapse_Count
+FROM Habit_Plan h
+LEFT JOIN Relapse_Log r ON h.Plan_ID = r.Plan_ID
+GROUP BY h.Plan_ID, h.Habit_Name;
+
+--Query 2: Rank users by the number of rewards they earned.
+SELECT u.User_ID, u.Username, COUNT(r.Reward_ID) AS Reward_Count
+FROM User u
+JOIN Habit_Plan h ON u.User_ID = h.User_ID
+LEFT JOIN Reward r ON h.Plan_ID = r.Plan_ID
+GROUP BY u.User_ID, u.Username
+ORDER BY Reward_Count DESC, u.Username ASC;
+
+-- Query 3: Find habit plans whose average progress score is greater than 80.
+SELECT h.Plan_ID, h.Habit_Name, AVG(p.Success_Score) AS Avg_Success
+FROM Habit_Plan h
+JOIN Progress_Report p ON h.Plan_ID = p.Plan_ID
+GROUP BY h.Plan_ID, h.Habit_Name
+HAVING AVG(p.Success_Score) > 80;
+
+-- Query 4: Find relapse logs whose severity level is above the overall average.
+SELECT Log_ID, Plan_ID, Incident_Date, Severity_Level
+FROM Relapse_Log
+WHERE Severity_Level > (
+    SELECT AVG(Severity_Level)
+    FROM Relapse_Log
+);
+
+-- Query 5: Find users who have at least one habit plan with no reward yet.
+SELECT DISTINCT u.User_ID, u.Username
+FROM User u
+JOIN Habit_Plan h ON u.User_ID = h.User_ID
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM Reward r
+    WHERE r.Plan_ID = h.Plan_ID
+);
+
+-- ==========================================
+-- Remaining 5 queries will be added by Emre Aksoy.
 -- ==========================================
