@@ -237,6 +237,19 @@ SELECT Badge_Name, Issue_Date
 FROM Reward
 WHERE Issue_Date > '2024-02-01';
 
+-- Query 3: Find the average success score across all progress reports.
+SELECT AVG(Success_Score) AS Avg_Score
+FROM Progress_Report;
+
+-- Query 4: Find the highest and lowest severity levels among all relapse logs.
+SELECT MAX(Severity_Level) AS Max_Severity,
+       MIN(Severity_Level) AS Min_Severity
+FROM Relapse_Log;
+
+-- Query 5: List all users ordered by their join date from earliest to latest.
+SELECT Username, Email, Join_Date
+FROM User
+ORDER BY Join_Date ASC;
 
 
 
