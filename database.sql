@@ -227,5 +227,5 @@ WHERE NOT EXISTS (
 );
 
 -- ==========================================
--- Remaining 5 queries will be added by Emre Aksoy.
+-- QUERIES BY: Rıza Emre Aksoy (31977)
 -- ==========================================
