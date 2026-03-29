@@ -229,3 +229,18 @@ WHERE NOT EXISTS (
 -- ==========================================
 -- QUERIES BY: Rıza Emre Aksoy (31977)
 -- ==========================================
+-- Query 1: Retrieve all accountability partners.
+SELECT * FROM Accountability_Partner;
+
+-- Query 2: Retrieve all accountability partners.
+SELECT Badge_Name, Issue_Date
+FROM Reward
+WHERE Issue_Date > '2024-02-01';
+
+
+
+
+
+
+
+
